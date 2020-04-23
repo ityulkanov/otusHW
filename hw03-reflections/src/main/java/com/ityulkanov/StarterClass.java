@@ -13,28 +13,30 @@ import java.util.List;
 
 public class StarterClass {
 
+    private static int counter = 0;
+
     public static void processAnnotations(final Class<TestClass> testClassClass) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
         final Method[] methods = testClassClass.getDeclaredMethods();
         for (final Method method : methods) {
             final Annotation[] declaredAnnotations = method.getDeclaredAnnotations();
             for (final Annotation declaredAnnotation : declaredAnnotations) {
                 if (declaredAnnotation instanceof Before) {
-                    System.out.println("We are starting Before method");
                 }
             }
             for (final Annotation declaredAnnotation : declaredAnnotations) {
 
                 if (declaredAnnotation instanceof Test) {
-                    System.out.println("Wea re starting Test method");
+                    counter++;
                     method.invoke(testClassClass.newInstance(), new Object[0]);
+
                 }
             }
 
             for (final Annotation declaredAnnotation : declaredAnnotations) {
                 if (declaredAnnotation instanceof After) {
-                    System.out.println("Wea re stating after method");
                 }
             }
         }
+        System.out.printf("We've runnned total of %d tests\n", counter);
     }
 }
