@@ -14,7 +14,6 @@ public class TestClass {
     @Test
     @After
     public void firstMethod() {
-        System.out.println("first method has been called \n");
     }
 
     @Before
@@ -28,6 +27,5 @@ public class TestClass {
     @Test
     @After
     public void thirdMethod() {
-        System.out.println("third method has been called \n");
     }
 }

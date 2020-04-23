@@ -30,8 +30,15 @@ public class StarterClass {
                 }
             }
         }
+        System.out.println("################################################");
         System.out.printf("We've runnned total of %d tests\n", counter);
-        System.out.printf("Total tests successfull %d\n", counter - exceptionCounter);
-        System.out.printf("Total tests failed %d\n", exceptionCounter);
+        System.out.println("################################################");
+
+        System.out.printf("Total tests successful: %d\n", counter - exceptionCounter);
+        System.out.println("################################################");
+
+        System.out.printf("Total tests failed:  %d\n", exceptionCounter);
+        System.out.println("------------------------------------------------");
+
     }
 }
