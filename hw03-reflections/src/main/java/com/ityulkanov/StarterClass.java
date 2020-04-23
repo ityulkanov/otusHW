@@ -14,6 +14,7 @@ import java.util.List;
 public class StarterClass {
 
     private static int counter = 0;
+    private static int exceptionCounter = 0;
 
     public static void processAnnotations(final Class<TestClass> testClassClass) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
         final Method[] methods = testClassClass.getDeclaredMethods();
@@ -27,7 +28,13 @@ public class StarterClass {
 
                 if (declaredAnnotation instanceof Test) {
                     counter++;
-                    method.invoke(testClassClass.newInstance(), new Object[0]);
+
+                    try {
+                        method.invoke(testClassClass.newInstance(), new Object[0]);
+                    } catch (Exception e) {
+                        exceptionCounter++;
+
+                    }
 
                 }
             }
@@ -38,5 +45,7 @@ public class StarterClass {
             }
         }
         System.out.printf("We've runnned total of %d tests\n", counter);
+        System.out.printf("Total tests successfull %d\n", counter - exceptionCounter);
+        System.out.printf("Total tests failed %d\n", exceptionCounter);
     }
 }

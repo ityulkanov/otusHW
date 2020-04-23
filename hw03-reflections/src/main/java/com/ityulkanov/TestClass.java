@@ -20,8 +20,8 @@ public class TestClass {
     @Before
     @Test
     @After
-    public void secondMethod() {
-        System.out.println("second method has been called \n");
+    public void secondMethod() throws Exception {
+        throw new Exception();
     }
 
     @Before
