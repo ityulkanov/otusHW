@@ -8,23 +8,16 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.List;
 
 public class StarterClass {
 
     public static void processAnnotations(Class<TestClass> testClassClass) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
-        final Method[] methods = testClassClass.getMethods();
-        List<Method> annotatedMethods = null;
-
+        final Method[] methods = testClassClass.getDeclaredMethods();
         for (Method method : methods) {
-            if (testClassClass.getMethod(method.getName()).isAnnotationPresent(Test.class)) {
-                annotatedMethods.add(method);
-            }
-
-        }
-        for (Method method : annotatedMethods) {
-            final Constructor<?> constructor = testClassClass.getConstructor();
-            final Object o = constructor.newInstance();
+//            final Constructor<?> constructor = testClassClass.getConstructor();
+//            final Object o = constructor.newInstance();
             System.out.println("Processing method" + method.getName());
 
             final Annotation[] declaredAnnotations = method.getDeclaredAnnotations();
@@ -37,6 +30,7 @@ public class StarterClass {
 
                 if (declaredAnnotation instanceof Test) {
                     System.out.println("Wea re starting Test method");
+                    method.invoke(testClassClass.newInstance(), "");
                 }
             }
 
