@@ -16,8 +16,6 @@ public class StarterClass {
     public static void processAnnotations(Class<TestClass> testClassClass) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
         final Method[] methods = testClassClass.getDeclaredMethods();
         for (Method method : methods) {
-//            final Constructor<?> constructor = testClassClass.getConstructor();
-//            final Object o = constructor.newInstance();
             System.out.println("Processing method" + method.getName());
 
             final Annotation[] declaredAnnotations = method.getDeclaredAnnotations();
@@ -30,7 +28,7 @@ public class StarterClass {
 
                 if (declaredAnnotation instanceof Test) {
                     System.out.println("Wea re starting Test method");
-                    method.invoke(testClassClass.newInstance(), "");
+                    method.invoke(testClassClass.newInstance(), new Object[0]);
                 }
             }
 
