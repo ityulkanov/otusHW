@@ -13,18 +13,16 @@ import java.util.List;
 
 public class StarterClass {
 
-    public static void processAnnotations(Class<TestClass> testClassClass) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
+    public static void processAnnotations(final Class<TestClass> testClassClass) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
         final Method[] methods = testClassClass.getDeclaredMethods();
-        for (Method method : methods) {
-            System.out.println("Processing method" + method.getName());
-
+        for (final Method method : methods) {
             final Annotation[] declaredAnnotations = method.getDeclaredAnnotations();
-            for (Annotation declaredAnnotation : declaredAnnotations) {
+            for (final Annotation declaredAnnotation : declaredAnnotations) {
                 if (declaredAnnotation instanceof Before) {
                     System.out.println("We are starting Before method");
                 }
             }
-            for (Annotation declaredAnnotation : declaredAnnotations) {
+            for (final Annotation declaredAnnotation : declaredAnnotations) {
 
                 if (declaredAnnotation instanceof Test) {
                     System.out.println("Wea re starting Test method");
@@ -32,7 +30,7 @@ public class StarterClass {
                 }
             }
 
-            for (Annotation declaredAnnotation : declaredAnnotations) {
+            for (final Annotation declaredAnnotation : declaredAnnotations) {
                 if (declaredAnnotation instanceof After) {
                     System.out.println("Wea re stating after method");
                 }
