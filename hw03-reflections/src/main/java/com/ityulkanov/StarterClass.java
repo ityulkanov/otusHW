@@ -14,11 +14,15 @@ public class StarterClass {
 
     public static void processAnnotations(Class<TestClass> testClassClass) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
         final Method[] methods = testClassClass.getMethods();
+        List<Method> annotatedMethods = null;
+
         for (Method method : methods) {
-            boolean testMethods = testClassClass.getMethod(method.getName()).isAnnotationPresent(Test.class);
+            if (testClassClass.getMethod(method.getName()).isAnnotationPresent(Test.class)) {
+                annotatedMethods.add(method);
+            }
 
         }
-        for (Method method : methods) {
+        for (Method method : annotatedMethods) {
             final Constructor<?> constructor = testClassClass.getConstructor();
             final Object o = constructor.newInstance();
             System.out.println("Processing method" + method.getName());
