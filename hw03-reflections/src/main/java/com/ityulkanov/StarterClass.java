@@ -5,11 +5,8 @@ import com.ityulkanov.annotations.Before;
 import com.ityulkanov.annotations.Test;
 
 import java.lang.annotation.Annotation;
-import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.List;
 
 public class StarterClass {
 
@@ -21,14 +18,8 @@ public class StarterClass {
         for (final Method method : methods) {
             final Annotation[] declaredAnnotations = method.getDeclaredAnnotations();
             for (final Annotation declaredAnnotation : declaredAnnotations) {
-                if (declaredAnnotation instanceof Before) {
-                }
-            }
-            for (final Annotation declaredAnnotation : declaredAnnotations) {
-
                 if (declaredAnnotation instanceof Test) {
                     counter++;
-
                     try {
                         method.invoke(testClassClass.newInstance(), new Object[0]);
                     } catch (Exception e) {
@@ -36,11 +27,6 @@ public class StarterClass {
 
                     }
 
-                }
-            }
-
-            for (final Annotation declaredAnnotation : declaredAnnotations) {
-                if (declaredAnnotation instanceof After) {
                 }
             }
         }
