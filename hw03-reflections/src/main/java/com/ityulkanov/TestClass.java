@@ -6,16 +6,22 @@ import com.ityulkanov.annotations.Test;
 
 public class TestClass {
 
+    TestClass() {
+
+    }
+
     @Before
     @Test
     @After
     public void firstMethod() {
     }
+
     @Before
     @Test
     @After
     public void secondMethod() {
     }
+
     @Before
     @Test
     @After

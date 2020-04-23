@@ -5,13 +5,22 @@ import com.ityulkanov.annotations.Before;
 import com.ityulkanov.annotations.Test;
 
 import java.lang.annotation.Annotation;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.List;
 
 public class StarterClass {
 
-    public static void processAnnotations(Class<TestClass> testClassClass) {
+    public static void processAnnotations(Class<TestClass> testClassClass) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
         final Method[] methods = testClassClass.getMethods();
         for (Method method : methods) {
+            boolean testMethods = testClassClass.getMethod(method.getName()).isAnnotationPresent(Test.class);
+
+        }
+        for (Method method : methods) {
+            final Constructor<?> constructor = testClassClass.getConstructor();
+            final Object o = constructor.newInstance();
             System.out.println("Processing method" + method.getName());
 
             final Annotation[] declaredAnnotations = method.getDeclaredAnnotations();
@@ -21,6 +30,7 @@ public class StarterClass {
                 }
             }
             for (Annotation declaredAnnotation : declaredAnnotations) {
+
                 if (declaredAnnotation instanceof Test) {
                     System.out.println("Wea re starting Test method");
                 }
