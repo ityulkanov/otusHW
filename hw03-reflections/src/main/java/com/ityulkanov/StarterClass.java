@@ -4,7 +4,6 @@ import com.ityulkanov.annotations.After;
 import com.ityulkanov.annotations.Before;
 import com.ityulkanov.annotations.Test;
 
-import java.lang.annotation.Annotation;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
@@ -14,20 +13,24 @@ public class StarterClass {
     private static int exceptionCounter = 0;
 
     public static void processAnnotations(final Class<TestClass> testClassClass) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
+
+
         final Method[] methods = testClassClass.getDeclaredMethods();
+        final TestClass testClass = testClassClass.newInstance();
         for (final Method method : methods) {
-            final Annotation[] declaredAnnotations = method.getDeclaredAnnotations();
-            for (final Annotation declaredAnnotation : declaredAnnotations) {
-                if (declaredAnnotation instanceof Test) {
-                    counter++;
-                    try {
-                        method.invoke(testClassClass.newInstance(), new Object[0]);
-                    } catch (Exception e) {
-                        exceptionCounter++;
+            if (method.isAnnotationPresent(Before.class)) {
+                method.invoke(testClass, new Object[0]);
+            }
+        }
+        for (Method method : methods) {
+            if (method.isAnnotationPresent(Test.class)) {
+                method.invoke(testClass, new Object[0]);
+            }
+        }
 
-                    }
-
-                }
+        for (Method method : methods) {
+            if (method.isAnnotationPresent(After.class)) {
+                method.invoke(testClass, new Object[0]);
             }
         }
         System.out.println("################################################");
